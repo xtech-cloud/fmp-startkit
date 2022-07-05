@@ -6,21 +6,35 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
 {
     public class HealthyBaseView : View
     {
-        protected Facade? facade_;
-        protected HealthyModel? model_;
-        protected HealthyService? service_;
-
         public HealthyBaseView(string _uid) : base(_uid)
         {
 
         }
 
-        protected override void preSetup()
+        protected HealthyModel? model_
         {
-            facade_ = findFacade(HealthyFacade.NAME) as HealthyFacade;
-            model_ = findModel(HealthyModel.NAME) as HealthyModel;
-            service_ = findService(HealthyService.NAME) as HealthyService;
+            get
+            {
+                return findModel(HealthyModel.NAME) as HealthyModel;
+            }
         }
+
+        protected HealthyService? service_
+        {
+            get
+            {
+                return findService(HealthyService.NAME) as HealthyService;
+            }
+        }
+
+        protected HealthyFacade? facade_
+        {
+            get
+            {
+                return findFacade(HealthyFacade.NAME) as HealthyFacade;
+            }
+        }
+
 
         protected override void setup()
         {

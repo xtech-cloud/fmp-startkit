@@ -1,5 +1,6 @@
 ﻿@page "/xtc/startkit/healthy"
 
+@using XTC.FMP.LIB.MVCS;
 @using XTC.FMP.MOD.StartKit.LIB.Bridge
 @using XTC.FMP.MOD.StartKit.LIB.MVCS;
 
@@ -8,7 +9,7 @@
 <button @onclick="onClick">Call</button>
 <div class="healthy">Response: @rspMsg</div>
 
-@inject Entry entry_;
+@inject Framework framework_;
 
 @code {
     public class HealthyUiBridge : IHealthyUiBridge
@@ -36,16 +37,29 @@
     private string? reqMsg;
     private HealthyFacade facade_;
 
+    private HealthyFacade facade
+    {
+        get
+        {
+            if(null == facade_)
+            {
+                var entry = framework_.FindUserData("XTC.FMP.MOD.StartKit.LIB.MVCS.Entry") as Entry;
+                facade_ = entry?.getFacade();
+                facade_?.setUiBridge(new HealthyUiBridge(this));
+            }
+            return facade_;
+        }
+    }
+
+
     protected override async Task OnInitializedAsync()
     {
-        facade_ = entry_.getFacade();
-        facade_.setUiBridge(new HealthyUiBridge(this));
     }
 
     private async Task onClick()
     {
         var dto = new EchoResponseDTO();
         dto.msg = reqMsg;
-        await (facade_.getViewBridge() as IHealthyViewBridge).OnEchoSubmit(dto);
+        await (facade.getViewBridge() as IHealthyViewBridge).OnEchoSubmit(dto);
     }
 }

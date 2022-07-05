@@ -7,9 +7,16 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
 {
     public class HealthyBaseService : Service
     {
-        protected HealthyModel? model_;
         protected Healthy.HealthyClient? healthyClient_;
         protected GrpcChannel? grpcChannel_;
+
+        protected HealthyModel? model_
+        {
+            get
+            {
+                return findModel(HealthyModel.NAME) as HealthyModel;
+            }
+        }
 
         public HealthyBaseService(string _uid) : base(_uid)
         {
@@ -21,14 +28,6 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
             grpcChannel_ = _channel;
         }
 
-        protected override void preSetup()
-        {
-            model_ = findModel(HealthyModel.NAME) as HealthyModel;
-        }
-
-        protected override void setup()
-        {
-        }
 
         protected Healthy.HealthyClient? getGrpcClient()
         {

@@ -4,20 +4,18 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
 {
     public class HealthyBaseController : Controller
     {
-        public HealthyBaseController(string _uid):base(_uid)
+        public HealthyBaseController(string _uid) : base(_uid)
         {
 
         }
 
-        protected HealthyView? view_ { get; set; }
-
-        protected override void preSetup()
+        protected HealthyView? view_
         {
-            view_ = findView(HealthyView.NAME) as HealthyView;
+            get
+            {
+                return findView(HealthyView.NAME) as HealthyView;
+            }
         }
 
-        protected override void setup()
-        {
-        }
     }
 }

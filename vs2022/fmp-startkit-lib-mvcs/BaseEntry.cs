@@ -4,12 +4,21 @@ using XTC.FMP.MOD.StartKit.LIB.Bridge;
 
 namespace XTC.FMP.MOD.StartKit.LIB.MVCS
 {
-    public class Options
+    public class Options : IUserData
     {
-        public GrpcChannel? channel;
+        public GrpcChannel? getChannel()
+        {
+            return channel_;
+        }
+
+        public void setChannel(GrpcChannel? _channel)
+        {
+            channel_ = _channel;
+        }
+        private GrpcChannel? channel_;
     }
 
-    public class BaseEntry
+    public class BaseEntry : IUserData
     {
         protected HealthyFacade? facade_;
         protected HealthyModel? model_;
@@ -30,12 +39,12 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
         }
 
 
-        public Error Register()
+        public Error StaticRegister()
         {
             if (null == framework_)
                 return Error.NewNullErr("framework is null");
 
-           
+
             // 注册数据层
             model_ = new HealthyModel(HealthyModel.NAME);
             framework_.getStaticPipe().RegisterModel(model_);
@@ -48,7 +57,7 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
             // 注册服务层
             service_ = new HealthyService(HealthyService.NAME);
             framework_.getStaticPipe().RegisterService(service_);
-            service_.InjectGrpcChannel(options_?.channel);
+            service_.InjectGrpcChannel(options_?.getChannel());
             // 注册UI装饰层
             facade_ = new HealthyFacade(HealthyFacade.NAME);
             var bridge = new HealthyViewBridge();
@@ -59,7 +68,36 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
             return Error.OK;
         }
 
-        public Error Cancel()
+        public Error DynamicRegister()
+        {
+            if (null == framework_)
+                return Error.NewNullErr("framework is null");
+
+
+            // 注册数据层
+            model_ = new HealthyModel(HealthyModel.NAME);
+            framework_.getDynamicPipe().PushModel(model_);
+            // 注册视图层
+            view_ = new HealthyView(HealthyView.NAME);
+            framework_.getDynamicPipe().PushView(view_);
+            // 注册控制层
+            controller_ = new HealthyController(HealthyController.NAME);
+            framework_.getDynamicPipe().PushController(controller_);
+            // 注册服务层
+            service_ = new HealthyService(HealthyService.NAME);
+            framework_.getDynamicPipe().PushService(service_);
+            service_.InjectGrpcChannel(options_?.getChannel());
+            // 注册UI装饰层
+            facade_ = new HealthyFacade(HealthyFacade.NAME);
+            var bridge = new HealthyViewBridge();
+            bridge.service = service_;
+            facade_.setViewBridge(bridge);
+            framework_.getDynamicPipe().PushFacade(facade_);
+
+            return Error.OK;
+        }
+
+        public Error StaticCancel()
         {
             if (null == framework_)
                 return Error.NewNullErr("framework is null");
@@ -74,7 +112,25 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
             framework_.getStaticPipe().CancelFacade(facade_);
             // 注销数据层
             framework_.getStaticPipe().CancelModel(model_);
-            
+
+            return Error.OK;
+        }
+
+        public Error DynamicCancel()
+        {
+            if (null == framework_)
+                return Error.NewNullErr("framework is null");
+
+            // 注销服务层
+            framework_.getDynamicPipe().PopService(service_);
+            // 注销控制层
+            framework_.getDynamicPipe().PopController(controller_);
+            // 注销视图层
+            framework_.getDynamicPipe().PopView(view_);
+            // 注销UI装饰层
+            framework_.getDynamicPipe().PopFacade(facade_);
+            // 注销数据层
+            framework_.getDynamicPipe().PopModel(model_);
 
             return Error.OK;
         }

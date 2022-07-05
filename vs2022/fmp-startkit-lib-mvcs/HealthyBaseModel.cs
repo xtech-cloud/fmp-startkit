@@ -9,11 +9,16 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
 
         }
 
-        protected HealthyController? controller_ { get; set; }
+        protected HealthyController? controller_
+        {
+            get
+            {
+                return findController(HealthyController.NAME) as HealthyController;
+            }
+        }
 
         protected override void preSetup()
         {
-            controller_ = findController(HealthyController.NAME) as HealthyController;
         }
 
         protected override void preDismantle()
