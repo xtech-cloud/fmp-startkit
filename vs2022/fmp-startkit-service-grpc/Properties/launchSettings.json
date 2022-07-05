@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "fmp-startkit-grpc-service": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:18000;https://localhost:19000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

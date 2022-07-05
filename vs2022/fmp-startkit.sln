@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fmp-startkit-lib-mvcs", "fmp-startkit-lib-mvcs\fmp-startkit-lib-mvcs.csproj", "{72BF5E4E-322F-494E-B1AE-6C0F16AD342E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fmp-startkit-lib-proto", "fmp-startkit-lib-proto\fmp-startkit-lib-proto.csproj", "{23C09538-5535-45E1-A8BD-B7FAE329AB13}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fmp-startkit-service-grpc", "fmp-startkit-service-grpc\fmp-startkit-service-grpc.csproj", "{EEDB9E32-171D-473E-8005-5B5FF6F893C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fmp-startkit-lib-bridge", "fmp-startkit-lib-bridge\fmp-startkit-lib-bridge.csproj", "{65E7E4C4-8000-46E4-9470-8A9979831319}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fmp-startkit-web-blazor", "fmp-startkit-web-blazor\fmp-startkit-web-blazor.csproj", "{107B727D-03DE-4FA0-8324-6100271D8432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fmp-startkit-lib-razor", "fmp-startkit-lib-razor\fmp-startkit-lib-razor.csproj", "{BC93EBF0-A955-4DEA-877A-578B42A35035}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72BF5E4E-322F-494E-B1AE-6C0F16AD342E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72BF5E4E-322F-494E-B1AE-6C0F16AD342E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72BF5E4E-322F-494E-B1AE-6C0F16AD342E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72BF5E4E-322F-494E-B1AE-6C0F16AD342E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23C09538-5535-45E1-A8BD-B7FAE329AB13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23C09538-5535-45E1-A8BD-B7FAE329AB13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23C09538-5535-45E1-A8BD-B7FAE329AB13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23C09538-5535-45E1-A8BD-B7FAE329AB13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDB9E32-171D-473E-8005-5B5FF6F893C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDB9E32-171D-473E-8005-5B5FF6F893C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDB9E32-171D-473E-8005-5B5FF6F893C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDB9E32-171D-473E-8005-5B5FF6F893C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E7E4C4-8000-46E4-9470-8A9979831319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E7E4C4-8000-46E4-9470-8A9979831319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E7E4C4-8000-46E4-9470-8A9979831319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E7E4C4-8000-46E4-9470-8A9979831319}.Release|Any CPU.Build.0 = Release|Any CPU
+		{107B727D-03DE-4FA0-8324-6100271D8432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{107B727D-03DE-4FA0-8324-6100271D8432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{107B727D-03DE-4FA0-8324-6100271D8432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{107B727D-03DE-4FA0-8324-6100271D8432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC93EBF0-A955-4DEA-877A-578B42A35035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC93EBF0-A955-4DEA-877A-578B42A35035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC93EBF0-A955-4DEA-877A-578B42A35035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC93EBF0-A955-4DEA-877A-578B42A35035}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0A4ED93-DBFF-49C0-A5C5-B5BC15BA5B98}
+	EndGlobalSection
+EndGlobal

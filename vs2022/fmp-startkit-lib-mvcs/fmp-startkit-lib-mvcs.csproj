@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>FMP.Startkit.Core</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="fmp-lib-mvcs" Version="1.2.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.47.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\fmp-startkit-lib-bridge\fmp-startkit-lib-bridge.csproj" />
+    <ProjectReference Include="..\fmp-startkit-lib-proto\fmp-startkit-lib-proto.csproj" />
+  </ItemGroup>
+
+</Project>

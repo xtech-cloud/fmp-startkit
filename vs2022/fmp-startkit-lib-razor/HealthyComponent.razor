@@ -1,0 +1,51 @@
+﻿@page "/xtc/startkit/healthy"
+
+@using XTC.FMP.MOD.StartKit.LIB.Bridge
+@using XTC.FMP.MOD.StartKit.LIB.MVCS;
+
+<div class="healthy">Request: Healthy.Echo</div>
+<input @bind="reqMsg" />
+<button @onclick="onClick">Call</button>
+<div class="healthy">Response: @rspMsg</div>
+
+@inject Entry entry_;
+
+@code {
+    public class HealthyUiBridge : IHealthyUiBridge
+    {
+        private HealthyComponent razor_;
+
+        public HealthyUiBridge(HealthyComponent _razor)
+        {
+            razor_ = _razor;
+        }
+
+        public void Alert(string _code, string _message)
+        {
+            razor_.rspMsg = string.Format(_message);
+        }
+
+        public void RefreshEcho(IDTO _dto)
+        {
+            var dto = _dto as EchoResponseDTO;
+            razor_.rspMsg = dto?.msg ?? "";
+        }
+    }
+
+    private string? rspMsg;
+    private string? reqMsg;
+    private HealthyFacade facade_;
+
+    protected override async Task OnInitializedAsync()
+    {
+        facade_ = entry_.getFacade();
+        facade_.setUiBridge(new HealthyUiBridge(this));
+    }
+
+    private async Task onClick()
+    {
+        var dto = new EchoResponseDTO();
+        dto.msg = reqMsg;
+        await (facade_.getViewBridge() as IHealthyViewBridge).OnEchoSubmit(dto);
+    }
+}
