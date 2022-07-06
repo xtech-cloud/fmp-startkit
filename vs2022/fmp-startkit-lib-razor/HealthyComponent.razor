@@ -1,15 +1,21 @@
 ﻿@page "/xtc/startkit/healthy"
 
-@using XTC.FMP.LIB.MVCS;
-@using XTC.FMP.MOD.StartKit.LIB.Bridge
-@using XTC.FMP.MOD.StartKit.LIB.MVCS;
-
-<div class="healthy">Request: Healthy.Echo</div>
-<input @bind="reqMsg" />
-<button @onclick="onClick">Call</button>
-<div class="healthy">Response: @rspMsg</div>
+<Space Direction="DirectionVHType.Vertical">
+    <SpaceItem>
+        <Text>Request: Healthy.Echo</Text>
+        <Input Placeholder="Message" @bind-Value="@reqMsg" />
+    </SpaceItem>
+    <SpaceItem>
+        <Button Type="@ButtonType.Primary" OnClick="@onClick">Call</Button>
+    </SpaceItem>
+    <SpaceItem>
+        <Text>Response:</Text>
+        <Input @bind-Value="@rspMsg" ReadOnly="true" />
+    </SpaceItem>
+</Space>
 
 @inject Framework framework_;
+@inject Logger logger_;
 
 @code {
     public class HealthyUiBridge : IHealthyUiBridge
@@ -35,16 +41,31 @@
 
     private string? rspMsg;
     private string? reqMsg;
-    private HealthyFacade facade_;
+    private HealthyFacade? facade_;
 
-    private HealthyFacade facade
+    private HealthyFacade? facade
     {
         get
         {
-            if(null == facade_)
+            if (null == facade_)
             {
+                if (null == framework_)
+                {
+                    logger_.Error("framework_ is null");
+                    return null;
+                }
                 var entry = framework_.FindUserData("XTC.FMP.MOD.StartKit.LIB.MVCS.Entry") as Entry;
+                if (null == entry)
+                {
+                    logger_.Error("entry is null");
+                    return null;
+                }
                 facade_ = entry?.getFacade();
+                if (null == facade_)
+                {
+                    logger_.Error("facade_ is null");
+                    return null;
+                }
                 facade_?.setUiBridge(new HealthyUiBridge(this));
             }
             return facade_;
@@ -54,12 +75,20 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await base.OnInitializedAsync();
     }
 
     private async Task onClick()
     {
         var dto = new EchoResponseDTO();
         dto.msg = reqMsg;
-        await (facade.getViewBridge() as IHealthyViewBridge).OnEchoSubmit(dto);
+        var bridge = (facade?.getViewBridge() as IHealthyViewBridge);
+        if (null == bridge)
+        {
+            logger_.Error("bridge is null");
+            return;
+        }
+        logger_.Trace("invoke OnEchoSubmit");
+        await bridge.OnEchoSubmit(dto);
     }
 }

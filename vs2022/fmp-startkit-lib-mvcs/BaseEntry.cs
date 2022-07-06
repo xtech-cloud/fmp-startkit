@@ -39,11 +39,12 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
         }
 
 
-        public Error StaticRegister()
+        public Error StaticRegister(Logger? _logger)
         {
+            _logger?.Trace("StaticRegister");
+
             if (null == framework_)
                 return Error.NewNullErr("framework is null");
-
 
             // 注册数据层
             model_ = new HealthyModel(HealthyModel.NAME);
@@ -68,15 +69,19 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
             return Error.OK;
         }
 
-        public Error DynamicRegister()
+        public Error DynamicRegister(Logger _logger)
         {
-            if (null == framework_)
-                return Error.NewNullErr("framework is null");
+            _logger.Trace("DynamicRegister");
 
+            if (null == framework_)
+            {
+                return Error.NewNullErr("framework is null");
+            }
 
             // 注册数据层
             model_ = new HealthyModel(HealthyModel.NAME);
             framework_.getDynamicPipe().PushModel(model_);
+
             // 注册视图层
             view_ = new HealthyView(HealthyView.NAME);
             framework_.getDynamicPipe().PushView(view_);
@@ -97,8 +102,10 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
             return Error.OK;
         }
 
-        public Error StaticCancel()
+        public Error StaticCancel(Logger _logger)
         {
+            _logger?.Trace("StaticCancel");
+
             if (null == framework_)
                 return Error.NewNullErr("framework is null");
 
@@ -116,8 +123,10 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
             return Error.OK;
         }
 
-        public Error DynamicCancel()
+        public Error DynamicCancel(Logger _logger)
         {
+            _logger?.Trace("DynamicCancel");
+
             if (null == framework_)
                 return Error.NewNullErr("framework is null");
 

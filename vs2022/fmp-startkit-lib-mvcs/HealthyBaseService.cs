@@ -22,12 +22,10 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
         {
 
         }
-
         public void InjectGrpcChannel(GrpcChannel? _channel)
         {
             grpcChannel_ = _channel;
         }
-
 
         protected Healthy.HealthyClient? getGrpcClient()
         {
@@ -44,12 +42,14 @@ namespace XTC.FMP.MOD.StartKit.LIB.MVCS
 
         public async Task CallEcho(EchoRequest _request)
         {
+            getLogger()?.Trace("CallEcho");
             var client = getGrpcClient();
             if (null == client)
                 return;
+
+            // TODO Blazor WASM Crash!!!!
             var response = await client.EchoAsync(_request);
             model_?.ReceiveEcho(response);
         }
-
     }
 }

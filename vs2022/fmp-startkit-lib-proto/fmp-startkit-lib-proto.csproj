@@ -1,15 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>fmp_startkit_grpc_server</RootNamespace>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
 	<Protobuf Include="..\..\proto\StartKit\*.proto" GrpcServices="Both" />
 	<PackageReference Include="Google.Api.CommonProtos" Version="2.6.0" />
-	<PackageReference Include="Google.Protobuf" Version="3.21.2" />
 	<PackageReference Include="Grpc.Core" Version="2.46.3" />
     <PackageReference Include="Grpc.Tools" Version="2.47.0">
       <PrivateAssets>all</PrivateAssets>
