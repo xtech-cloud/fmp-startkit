@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/api/annotations.proto";
+import "shared.proto";
 
 option csharp_namespace = "XTC.FMP.MOD.StartKit.LIB.Proto";
 
@@ -13,12 +14,6 @@ service Healthy {
          };
     }
 }
-
-message Status {
-  int32 code = 1;     // 状态码
-  string message = 2; // 状态信息
-}
-
 
 message EchoRequest {
     string msg = 1;
