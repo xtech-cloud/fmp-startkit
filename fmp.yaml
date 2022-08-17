@@ -1,0 +1,7 @@
+generate:
+  active: true
+  org_name: XTC
+  module_name: Startkit
+  database_driver: none
+  debug: false
+  unity_solution: true
